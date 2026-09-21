@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ps" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ښکلی میدان شهر کمپیوټر پلورنځی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+            --glass-bg: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-hover: rgba(255, 255, 255, 0.15);
+            --accent-cyan: #38bdf8;
+            --accent-pink: #f472b6;
+            --accent-purple: #c084fc;
+            --text-main: #f8fafc;
+            --text-sub: #cbd5e1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* Ambient Glowing Background Elements */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
+            animation: float 10s ease-in-out infinite alternate;
+        }
+
+        .glow-1 {
+            width: 400px;
+            height: 400px;
+            background: #38bdf8;
+            top: -100px;
+            right: -100px;
+        }
+
+        .glow-2 {
+            width: 450px;
+            height: 450px;
+            background: #c084fc;
+            bottom: -150px;
+            left: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* Glassmorphism Navigation */
+        header {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            padding: 0 5%;
+        }
+
+        nav {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        /* Liquid Glass Buttons */
+        .liquid-btn {
+            position: relative;
+            padding: 0.7rem 1.8rem;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3),
+                        0 8px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .liquid-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.25),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .liquid-btn:hover::before {
+            left: 100%;
+        }
+
+        .liquid-btn:hover {
+            background: var(--glass-hover);
+            transform: translateY(-3px) scale(1.02);
+            border-color: var(--accent-cyan);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5),
+                        0 12px 25px rgba(56, 189, 248, 0.3);
+        }
+
+        .liquid-btn-primary {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(192, 132, 252, 0.2));
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 5% 4rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+            background: linear-gradient(to bottom, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-sub);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Glass Cards Section */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 4rem 0 2rem;
+            color: var(--accent-cyan);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-pink);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .glass-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .glass-card p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Glass Box */
+        .contact-section {
+            padding: 4rem 5%;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .contact-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-sub);
+            border-top: 1px solid var(--glass-border);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            nav { flex-direction: column; gap: 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Glass Orbs -->
+    <div class="glow-orb glow-1"></div>
+    <div class="glow-orb glow-2"></div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <div class="logo">ښکلی میدان شهر کمپیوټر پلورنځی</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="liquid-btn">اصلي پاڼه</a></li>
+                <li><a href="#products" class="liquid-btn">کمپیوټرونه</a></li>
+                <li><a href="#services" class="liquid-btn">خدمتونه</a></li>
+                <li><a href="#contact" class="liquid-btn liquid-btn-primary">اړیکه</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>په میدان ښار کې د لوړ کیفیت او غښتلیو کمپیوټرونو ترټولو معتبر مرکز</h1>
+        <p>موږ تاسو ته د غوره برانډونو ډیسکټاپ، لیپټاپ، اډاپټرې او ټول برقی لوازم په تر ټولو مناسب قیمت چمتو کوو.</p>
+        <a href="#products" class="liquid-btn liquid-btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">محصولات وګورئ</a>
+    </section>
+
+    <!-- Products Section -->
+    <h2 class="section-title" id="products">زموږ بې‌ساري محصولات</h2>
+    <div class="cards-grid">
+        <div class="glass-card">
+            <span class="card-icon">💻</span>
+            <h3>ګېمنګ او هائي اینډ لیپټاپونه</h3>
+            <p>د درنو پروګرامونو، گرافیک، او نویو لوبو لپاره تر ټولو ځواکمن پروسیسرونه او ګرافیک کارتونه.</p>
+            <a href="#contact" class="liquid-btn">قیمت او فرمایش</a>
+        </div>
+        <div class="glass-card">
+            <span class="card-icon">🖥️</span>
+            <h3>د دفتر او پوهنتون لیپټاپونه</h3>
+            <p>د محصلینو او افتري کارونو لپاره سټنډرډ، سپک او معتبر لیپټاپونه په پوره تضمین سره.</p>
+            <a href="#contact" class="liquid-btn">قیمت او فرمایش</a>
+        </div>
+        <div class="glass-card">
+            <span class="card-icon">🔌</span>
+            <h3>کمپیوټري ملحقات او وسایل</h3>
+            <p>اصل شارجرونه، باټرۍ، SSD ډسکونه، رېمونه او ډول ډول ګېمنګ وسایل.</p>
+            <a href="#contact" class="liquid-btn">قیمت او فرمایش</a>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <h2 class="section-title" id="services">ځانګړي خدمتونه</h2>
+    <div class="cards-grid">
+        <div class="glass-card">
+            <span class="card-icon">🛠️</span>
+            <h3>هارډویر او سفتویر ترمیم</h3>
+            <p>د وینډوز لګول، ډاټا ریکوري، او د کمپیوټر د پرزو مسلکي جوړونه.</p>
+        </div>
+        <div class="glass-card">
+            <span class="card-icon">🚀</span>
+            <h3>د سرعت زیاتول (SSD & RAM)</h3>
+            <p>ستاسو د زاړه کمپیوټر د سرعت په خورا سخته توګه لوړول.</p>
+        </div>
+        <div class="glass-card">
+            <span class="card-icon">🤝</span>
+            <h3>وړیا مشوره</h3>
+            <p>ستاسو د اړتیا مطابق د سم کمپیوټر په انتخاب کې وړيا رهنمايي.</p>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-box">
+            <h2>له موږ سره اړیکه ونیسئ</h2>
+            <p>ستاسو په خدمت کې یو! د لا زیاتو معلوماتو او فرمایش لپاره لاندې ادرس ته تشریف راوړئ.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    📍 **ادرس:** میدان وردګ، میدان ښار، مرکزي بازار
+                </div>
+                <div class="contact-item">
+                    📞 **شمېره:** ۰۷۰۱۲۳۴۵۶۷
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <a href="tel:0701234567" class="liquid-btn liquid-btn-primary">اوس مهال زنګ ووهئ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 ټولې حقوق د «ښکلی میدان شهر کمپیوټر پلورنځی» سره خوندي دي.</p>
+    </footer>
+
+</body>
+</html>
